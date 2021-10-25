@@ -75,7 +75,7 @@ The outline of the program can be summed as below
             ...
     
     def main():
-        rg = ReportGenerator(input_filename, output_filename, field_configs), future_movement_config)
+        rg = ReportGenerator(input_filename, output_filename, field_configs)
         rg.generate_summary_report()
         
 With that in mind here are the suggestions for the different possible upcoming scenarios. 
