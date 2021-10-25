@@ -21,6 +21,19 @@ Due to the nature of the problem scenario it is a good decision to make use of o
 
 ly here in parsing fixed-width datafiles, dealing with aggregation and grouping, also outputting to csv file. We will be using the latest Pandas version 1.3.4 however any previous version would work smoothly since the functionality used here are very basic to Pandas. 
 
+The entire report can be generated in less then 10 lines using Pandas without any complex calculations. 
+
+	df = pd.read_fwf("input.txt")
+
+	df["total_transaction_amount"] = df["quantity_long"] - df["quantity_short"]
+
+	client_information = ["client_type", "client_number", "account_number", "subaccount_number"]
+	product_information = ["exchange_code", "product_group_code", "symbol", "transaction_date"]
+
+	output_df = df.groupby(client_information + product_information, as_index=False)["total_transaction_amount"].sum()
+
+	output_df.to_csv("output.csv")
+
 ### Setup:
 The code is written in Python 3 and tested in Python 3.9, However any reasonable Python 3 version would work. To start with we need a Python 3 interpreter and a choice of virtualenv toolchain. 
 
