@@ -17,9 +17,7 @@ The workflow roughly follows as below:
     
     
 ### Pandas:
-Due to the nature of the problem scenario it is a good decision to make use of of Pandas library for Python. As Pandas makes most of the data handling easier especial
-
-ly here in parsing fixed-width datafiles, dealing with aggregation and grouping, also outputting to csv file. We will be using the latest Pandas version 1.3.4 however any previous version would work smoothly since the functionality used here are very basic to Pandas. 
+Due to the nature of the problem scenario it is a good decision to make use of of Pandas library for Python. As Pandas makes most of the data handling easier especially here in parsing fixed-width datafiles, dealing with aggregation and grouping, also outputting to csv file. We will be using the latest Pandas version 1.3.4 however any previous version would work smoothly since the functionality used here are very basic to Pandas. 
 
 The entire report can be generated in less then 10 lines using Pandas without any complex calculations. 
 
@@ -65,13 +63,11 @@ The outline of the program can be summed as below
 
     class ReportGenerator:
         def __init__(self, input_filename, output_filename, field_configs):
-            ...
-            self.load_dataframe()
-
-        def load_dataframe():
+	    # responsile for loading the dataframe from the input file
             ...
             
         def generate_summary_report():
+	    # responsible for groupby and aggregation and writing into output.csv
             ...
     
     def main():
