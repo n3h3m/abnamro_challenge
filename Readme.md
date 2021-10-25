@@ -1,9 +1,9 @@
-##ABN AMRO Coding Challenge:
+## ABN AMRO Coding Challenge:
 This Python script tries to address the challenge in parsing and generating a summary report based on input files that contain executed trade details. 
 
 However this program can be easily re-purposed to add more business logic to parse and process any ad-hoc report. 
 
-###Workflow:
+### Workflow:
 
 The workflow roughly follows as below:
 
@@ -16,7 +16,7 @@ The workflow roughly follows as below:
     
     
     
-###Pandas:
+### Pandas:
 Due to the nature of the problem scenario it is a good decision to make use of of Pandas library for Python. As Pandas makes most of the data handling easier especial
 
 ly here in parsing fixed-width datafiles, dealing with aggregation and grouping, also outputting to csv file. We will be using the latest Pandas version 1.3.4 however any previous version would work smoothly since the functionality used here are very basic to Pandas. 
@@ -67,7 +67,7 @@ The outline of the program can be summed as below
         
 With that in mind here are the suggestions for the different possible upcoming scenarios. 
 
-####Case 1:The definitions of `product_info` and `customer_info` change. 
+#### Case 1:The definitions of `product_info` and `customer_info` change. 
 Currently the definition of product and customer have been defined as combination of the exchange code, product group code, symbol, expiration date and client type, client number, account number, subaccount number respectively 
 
 This definition directly affect the groupby there by affecting the total sum value and the number of rows too. 
@@ -88,19 +88,19 @@ Any change in the product and customer info definition can be easily done by add
         "transaction_date",
     ]
 
-####Case 2: Adding a new report
+#### Case 2: Adding a new report
 
 Currently this program generates daily summary report resulting the total transaction amount of each unique product they have done for the day. That doesn't mean this program cannot be used for other reports. 
     
    Solution: To facilitate a new report simply add a new method under the class `ReportGenerator`. As constructing a `ReportGenerator` object automatically loads the dataframe, the new method has to only incorporate additional logic and aggregations. 
     
-####Case 3: Format of the input file changes
+#### Case 3: Format of the input file changes
   In a highly unlikely scenario, input file for the futures movement could change, either new fields can be added, or inserted in the middle, or the width could change to accommodate growing number of clients and product code. 
   
   Solution:
   If the format if the input file changes for future movements, then `configs/processed_future_movement.py` adjust the positions accordingly. Also new fields can be introduced and fields can be easily taken out, as the entire configuration are kept as a simply Python list. 
   
-####Case 4: Very different trade category is introduced. 
+#### Case 4: Very different trade category is introduced. 
 There can e scenarios the code can accommodate change for additional trade categories, so along with future trades, a new requirement arise to accommodate options trading or crypto trading which will have new set of field specifications. 
     
  Solution:
@@ -117,7 +117,7 @@ There can e scenarios the code can accommodate change for additional trade categ
   which then can be imported in `report_generator.py` and passed as the third arguemet while constructing ReportGenerator() object
 
 
-####Case 5: The field specification keeps changing yet backwards compatibility needs to be maintained.
+#### Case 5: The field specification keeps changing yet backwards compatibility needs to be maintained.
 
 This is a realistic scenario in complex business domains. The idea is to version each changes and request the origination of the input files to add a header row which consists of which version of the field specs needs to be followed while parsing the file. 
 
