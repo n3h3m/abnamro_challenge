@@ -109,7 +109,6 @@ class ReportGenerator:
 
         # Write the .csv output to the desired output filepath.
         self.output_df.to_csv(self.output_filename, index=False)
-        # self.input_df.to_csv(self.input_filename + 'lol', index=False, columns=client_info + product_info + ["quantity_long", "quantity_short"])
 
         logging.debug("Output file {} is saved to the disk".format(self.output_filename))
 
