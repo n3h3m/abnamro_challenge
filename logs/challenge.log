@@ -1,12 +1,6 @@
-2021-10-26 08:57:23,890 DEBUG report_generator.py:117 FUNC:main() Program started
-2021-10-26 08:57:23,890 DEBUG report_generator.py:43 FUNC:get_colspecs() extracting colspecs from field_configs
-2021-10-26 08:57:23,890 DEBUG report_generator.py:63 FUNC:get_names() extracting column names from field_configs
-2021-10-26 08:57:23,910 DEBUG report_generator.py:26 FUNC:__init__() loading input from data/input.txt to the dataframe is successful
-2021-10-26 08:57:23,920 DEBUG report_generator.py:114 FUNC:generate_summary_report() Output file data/output.csv is saved to the disk
-2021-10-26 08:57:23,920 DEBUG report_generator.py:126 FUNC:main() Program ended
-2021-10-26 13:16:21,831 DEBUG report_generator.py:115 FUNC:main() Program started
-2021-10-26 13:16:21,831 DEBUG report_generator.py:36 FUNC:get_colspecs() extracting colspecs from field_configs
-2021-10-26 13:16:21,831 DEBUG report_generator.py:56 FUNC:get_colnames() extracting column names from field_configs
-2021-10-26 13:16:21,851 DEBUG report_generator.py:19 FUNC:__init__() loading input from data/input.txt to the dataframe is successful
-2021-10-26 13:16:21,859 DEBUG report_generator.py:106 FUNC:generate_summary_report() Output file data/output.csv is saved to the disk
-2021-10-26 13:16:21,859 DEBUG report_generator.py:124 FUNC:main() Program ended
+2021-10-26 13:40:07,544 DEBUG report_generator.py:128 FUNC:main() Program started
+2021-10-26 13:40:07,544 DEBUG report_generator.py:36 FUNC:get_colspecs() extracting colspecs from field_configs
+2021-10-26 13:40:07,544 DEBUG report_generator.py:56 FUNC:get_colnames() extracting column names from field_configs
+2021-10-26 13:40:07,563 DEBUG report_generator.py:19 FUNC:__init__() loading input from data/input.txt to the dataframe is successful
+2021-10-26 13:40:07,570 DEBUG report_generator.py:119 FUNC:generate_report() Output file data/output.csv is saved to the disk
+2021-10-26 13:40:07,570 DEBUG report_generator.py:137 FUNC:main() Program ended

@@ -4,7 +4,6 @@ import pandas as pd
 
 from configs.processed_future_movement import future_movement_config
 
-
 class ReportGenerator:
     def __init__(self, input_filename, output_filename, field_configs):
         self.output_filename = output_filename
@@ -70,17 +69,17 @@ class ReportGenerator:
             logging.exception("Error in parsing the configuration at ine {}".format(f))
             raise
 
-    def generate_summary_report(self):
+    def summary_report(self):
         """
+        Update: Separating report generation and the dataframe manipulation
+        So that the dataframe manipulation can be tested in an isolated manner instead of complex mocking of files.
+
         This method is responsible for,
-            For each executed trade entries
-            Group by clients and product info
-            Calculate sum of the total transaction amount
-            Update the self.output_df
-            Write the .csv file to the output filepath
-
+        For each executed trade entries
+        Group by clients and product info
+        Calculate sum of the total transaction amount
+        Update the self.output_df
         """
-
         # client_info and product_info can be list of columns, used by Pandas while doing groupby
         client_info = [
             "client_type",
@@ -101,11 +100,23 @@ class ReportGenerator:
         # The actual logic that does the groupby magic and calculate the sum
         self.output_df = self.input_df.groupby(client_info + product_info, as_index=False)["total_transaction_amount"].sum()
 
+    def generate_report(self, method):
+        """
+        This method is responsible for,
+            Receive method name as parameter
+            Invoke the method
+            Write the output_df to .csv file
+
+            The method has been parameterised so that when new types of reports implemented the method name can be passed as parameter from the main function.
+        """
+
+        # Invoke the method
+        method(self)
+
         # Write the .csv output to the desired output filepath.
         self.output_df.to_csv(self.output_filename, index=False)
 
         logging.debug("Output file {} is saved to the disk".format(self.output_filename))
-
 
 def main():
     logging.basicConfig(
@@ -121,10 +132,9 @@ def main():
     rg = ReportGenerator("data/input.txt", "data/output.csv", future_movement_config)
 
     # Generate the summary report
-    rg.generate_summary_report()
+    rg.generate_report(ReportGenerator.summary_report)
 
     logging.debug("Program ended")
-
 
 if __name__ == "__main__":
     main()

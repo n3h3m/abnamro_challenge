@@ -1,7 +1,10 @@
 from unittest import TestCase
 
-from report_generator import ReportGenerator
+import pandas as pd
+from mock import patch
+from pandas._testing import assert_frame_equal
 
+from report_generator import ReportGenerator
 
 class TestReportGenerator(TestCase):
     def setUp(self):
@@ -50,3 +53,19 @@ class TestReportGenerator(TestCase):
     def test_constructor_file_missing_expect_FileNotFoundError(self):
         with self.assertRaises(FileNotFoundError):
             ReportGenerator("a_none_existing_filename", "", self.sample_config)
+
+    def test_generate_summary_report_success(self):
+        input_columns = "client_type,client_number,account_number,subaccount_number,exchange_code,product_group_code,symbol,transaction_date,quantity_long,quantity_short".split(",")
+        input_row = ['CL', 4321, 2, 1, 'SGX', 'FU', 'NK', '20100820', 1, 0]
+
+        # Expected dataframe
+        exp_columns = "client_type,client_number,account_number,subaccount_number,exchange_code,product_group_code,symbol,transaction_date,total_transaction_amount".split(",")
+        exp_row = ['CL', 4321, 2, 1, 'SGX', 'FU', 'NK', '20100820', 1]
+
+        # The __init__ can be mocked
+        with patch.object(ReportGenerator, "__init__", lambda x: None):
+            rg = ReportGenerator()
+            rg.input_df = pd.DataFrame([input_row, ], columns=input_columns)
+            rg.summary_report()
+            expected_df = pd.DataFrame([exp_row, ], columns=exp_columns)
+            assert_frame_equal(expected_df, rg.output_df)
