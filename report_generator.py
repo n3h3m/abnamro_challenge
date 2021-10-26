@@ -4,6 +4,7 @@ import pandas as pd
 
 from configs.processed_future_movement import future_movement_config
 
+
 class ReportGenerator:
     def __init__(self, input_filename, output_filename, field_configs):
         self.output_filename = output_filename
@@ -14,7 +15,7 @@ class ReportGenerator:
             self.input_df = pd.read_fwf(
                 self.input_filename,
                 colspecs=self.get_colspecs(self.field_configs),
-                names=self.get_names(self.field_configs),
+                names=self.get_colnames(self.field_configs),
             )
             logging.debug("loading input from {} to the dataframe is successful".format(self.input_filename))
         except FileNotFoundError:
@@ -51,19 +52,19 @@ class ReportGenerator:
             raise
 
     @staticmethod
-    def get_names(field_configs):
+    def get_colnames(field_configs):
         global f
         logging.debug("extracting column names from field_configs")
         # return [f[0] for f in field_configs]
 
         try:
-            names = []
+            colnames = []
             for f in field_configs:
                 assert len(f) == 3
                 assert isinstance(f[0], str)
                 assert f[0]  # Column name cannot be empty
-                names.append(f[0])  # Offset by 1 since Pandas' index starts with 0
-            return names
+                colnames.append(f[0])  # Offset by 1 since Pandas' index starts with 0
+            return colnames
 
         except (TypeError, IndexError, AssertionError):
             logging.exception("Error in parsing the configuration at ine {}".format(f))
@@ -105,6 +106,7 @@ class ReportGenerator:
 
         logging.debug("Output file {} is saved to the disk".format(self.output_filename))
 
+
 def main():
     logging.basicConfig(
         level=logging.DEBUG,
@@ -122,6 +124,7 @@ def main():
     rg.generate_summary_report()
 
     logging.debug("Program ended")
+
 
 if __name__ == "__main__":
     main()
