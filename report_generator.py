@@ -4,13 +4,6 @@ import pandas as pd
 
 from configs.processed_future_movement import future_movement_config
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    filename="logs/challenge.log",
-    format="%(asctime)s %(levelname)s %(filename)s:%(lineno)d FUNC:%(funcName)s() %(message)s",
-)
-
-
 class ReportGenerator:
     def __init__(self, input_filename, output_filename, field_configs):
         self.output_filename = output_filename
@@ -112,8 +105,13 @@ class ReportGenerator:
 
         logging.debug("Output file {} is saved to the disk".format(self.output_filename))
 
-
 def main():
+    logging.basicConfig(
+        level=logging.DEBUG,
+        filename="logs/challenge.log",
+        format="%(asctime)s %(levelname)s %(filename)s:%(lineno)d FUNC:%(funcName)s() %(message)s",
+    )
+
     logging.debug("Program started")
 
     # Create a ReportGenerator() object
@@ -124,7 +122,6 @@ def main():
     rg.generate_summary_report()
 
     logging.debug("Program ended")
-
 
 if __name__ == "__main__":
     main()

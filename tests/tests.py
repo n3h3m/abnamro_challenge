@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from abn_amro.report_generator import ReportGenerator
+from report_generator import ReportGenerator
 
 
 class TestReportGenerator(TestCase):

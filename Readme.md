@@ -140,7 +140,45 @@ configs` accordingly. Ignoring header row while constructing Pandas dataframe ca
 As seen above most newly arriving requirements can be either resolved by adding a new file, declaring additional rows, changing aggregate or at the most by implementing new method. That way the code is well maintained and the structure wouldn't have to change much. 
 
 ### Testing:
-This project uses `pytest` to invoke the unit tests. Test can be run with the below command
+Tests are found under `tests/` directory and at present all the tests are maintained in a single file `tests/test.py`. Tests can be invoked with the below command. 
+    python -m unittest tests/tests.py
 
-	pytest tests/tests.py
+As of now all the 7 tests are passing 
 
+    abn  13:12  ~  abn_amro  master  ⬆  python -m unittest tests/tests.py
+    ERROR:root:Check if the file exists or the filename is correct
+    Traceback (most recent call last):
+      File "/Users/nehem/abn_amro/report_generator.py", line 14, in __init__
+        self.input_df = pd.read_fwf(
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 762, in read_fwf
+        return _read(filepath_or_buffer, kwds)
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 482, in _read
+        parser = TextFileReader(filepath_or_buffer, **kwds)
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 811, in __init__
+        self._engine = self._make_engine(self.engine)
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 1040, in _make_engine
+        return mapping[engine](self.f, **self.options)  # type: ignore[call-arg]
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/parsers/python_parser.py", line 1203, in __init__
+        PythonParser.__init__(self, f, **kwds)
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/parsers/python_parser.py", line 96, in __init__
+        self._open_handles(f, kwds)
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/parsers/base_parser.py", line 222, in _open_handles
+        self.handles = get_handle(
+      File "/Users/nehem/.virtualenvs/abn/lib/python3.9/site-packages/pandas/io/common.py", line 702, in get_handle
+        handle = open(
+    FileNotFoundError: [Errno 2] No such file or directory: 'a_none_existing_filename'
+    ..ERROR:root:Error in parsing the configuration at ine record_code
+    Traceback (most recent call last):
+      File "/Users/nehem/abn_amro/report_generator.py", line 41, in get_colspecs
+        assert len(f) == 3
+    AssertionError
+    ...ERROR:root:Error in parsing the configuration at ine record_code
+    Traceback (most recent call last):
+      File "/Users/nehem/abn_amro/report_generator.py", line 62, in get_names
+        assert len(f) == 3
+    AssertionError
+    ..
+    ----------------------------------------------------------------------
+    Ran 7 tests in 0.003s
+    
+    OK
